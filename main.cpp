@@ -11,16 +11,15 @@ int main(){
 
         /* to get the operation*/
         menu.printMenu(); //responsible to print the initial menu
-
-        int code; //the choosen code from the user
-        cin >> code; //get the choosen code
+        int code = (cin >> (cout << "|----------------> Digite o codigo correspondente a operacao que deseja: ", code), code); // responsible to get code from the user.
+        
 
         system("CLS"); //responsible to clear de terminal
+
         if(code == 0) break; //exit the system when user choose 0 on menu.
 
-
         /* to confirm */
-        int confirm = menu.confirmCode(); //confirm or not the code
+        int confirm = menu.confirmCode(code); //confirm or not the code
 
 
         /* to handle submit */

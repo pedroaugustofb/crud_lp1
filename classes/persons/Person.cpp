@@ -16,4 +16,13 @@ class Person {
         float salary;
 
     public:
+        Person(int type){
+            switch(type){
+                case 1: this->officePost = "Operador";
+                case 2: this->officePost = "Gerente";
+                case 3: this->officePost = "Diretor";
+                case 4: this->officePost = "Presidente";
+            }
+        };
+
 };
