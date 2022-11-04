@@ -1,6 +1,9 @@
 #include <iostream>
 #include <string>
-#include "persons/Person.cpp"
+#include "persons/Operador.cpp"
+#include "persons/Gerente.cpp"
+#include "persons/Diretor.cpp"
+#include "persons/Presidente.cpp"
 
 using namespace std;
 
@@ -12,8 +15,8 @@ class Menu {
         //constructor
         Menu(){};
          
-        //print the inital menu
-        void printMenu(){
+        void printMenu(){ //print the inital menu
+            system("CLS");
             cout << "|--------------------------------------------------------------------------------------------------|" << endl;
             cout << "|                                    Cadastro de Funcionarios                                      |" << endl;
             cout << "|                                                                                                  |" << endl;
@@ -30,7 +33,7 @@ class Menu {
         }
 
         //print the confirm menu
-        int confirmCode(int type){
+        bool confirmCode(int type){
             int confirm;
             do{
                 cout << "|--------------------------------------------------------------------------------------------------|" << endl;
@@ -85,6 +88,25 @@ class Menu {
                 cout << "|                                   [4] - Cadastrar Presidente?                                    |" << endl;
                     break;
 
+                    case 12: // Confimar Cadastrar Operador
+                cout << "|                                        Cadastrar Operador?                                       |" << endl;
+                    break;
+
+                    case 13: // Confimar Cadastrar Gerente
+                cout << "|                                        Cadastrar Gerente?                                        |" << endl;
+                    break;
+
+                    case 14: // Confimar Cadastrar Diretor
+                cout << "|                                        Cadastrar Diretor?                                        |" << endl;
+                    break;
+
+                    case 15: // Confimar Cadastrar Presidente
+                cout << "|                                       Cadastrar Presidente?                                      |" << endl;
+                    break;
+
+                    default:
+                cout << "|                                             Confimar?                                            |" << endl;
+                    break;
                 }
 
                 cout << "|                                                                                                  |" << endl;
@@ -98,7 +120,8 @@ class Menu {
 
             }while(confirm == 0);
 
-            return confirm;
+            if(confirm == 1) return true;
+            else return false;
         }
 
         //to handle the user submit (code from menu)
@@ -123,7 +146,6 @@ class Menu {
 
         void cadastrarFuncionario(){
             
-            int personType; //new person type
             int newPerson = 0; //to create another person
 
             do{
@@ -144,21 +166,86 @@ class Menu {
                     cout << "|                                     [4] - Cadastrar Presidente.                                  |" << endl;
                     cout << "|                                                                                                  |" << endl;
                     cout << "|--------------------------------------------------------------------------------------------------|" << endl;
-                    int code = (cin >> (cout << "|----------------> Digite o codigo correspondente a operacao que deseja: ", code), code);
+                    int code = (cin >> (cout << "|----------------> Digite o codigo correspondente a operacao que deseja: ",code), code);
 
                     system("CLS");
 
                     /* confirm */
-                    int confirm = this->confirmCode(code + 7);
+                    bool confirm = this->confirmCode(code + 7);
 
-                    if(confirm == 1){
+                    if(confirm){
 
-                        if(code == 1 || code == 2 || code == 3 || code == 4){ //possibles for new Person
+                        if(code == 1){ //possibles for new Operador
                             
-                            /* create a new person to the system */
-                            Person newPerson = Person(code);
+                            /* create a new Operador to the system */
+                            Operador newPerson;
+                            for(int step = 0; step <= 6 ; step++){
+                                newPerson.CreatePersonMenu(step);
+
+                                if(step == 6){
+                                    bool create = this->confirmCode(12);
+                                    
+                                    // Se create for True deve-se salvar a nova Pessoa
+                                    // caso não deve se cancelar
+
+                                   if(!create) valid = false;
+                                }
+                            }
 
 
+                        } else if(code == 2){ //possibles for new Gerente
+                            
+                            /* create a new Gerente to the system */
+                            Gerente newPerson;
+                            for(int step = 0; step <= 7; step++){
+                                newPerson.CreatePersonMenu(step);
+
+                                if(step == 7){
+                                    bool create = this->confirmCode(13);
+
+                                    // Se create for True deve-se salvar a nova Pessoa
+                                    // caso não deve se cancelar
+
+                                    if(!create) valid = false;
+                                }
+                            }
+
+                        } else if(code == 3){ //possibles for new Diretor
+                            
+                            /* create a new Gerente to the system */
+                            Diretor newPerson;
+
+                            for(int step = 0; step <= 8; step++){
+                                newPerson.CreatePersonMenu(step);
+
+                                if(step == 8){
+                                    bool create = this->confirmCode(14);
+                                    
+                                    // Se create for True deve-se salvar a nova Pessoa
+                                    // caso não deve se cancelar
+
+                                    if(!create) valid = false;
+                                }
+                            }
+
+
+                        } else if(code == 4){ //possibles for new Presidente
+
+                         /* create a new Gerente to the system */
+                            Presidente newPerson;
+
+                            for(int step = 0; step <= 8; step++){
+                                newPerson.CreatePersonMenu(step);
+
+                                if(step == 8){
+                                    bool create = this->confirmCode(15);
+                                    
+                                    // Se create for True deve-se salvar a nova Pessoa
+                                    // caso não deve se cancelar
+
+                                    if(!create) valid = false;
+                                }
+                            }
 
                         } else if(code != 0) valid = false; // the code is 0
                     } else valid = false; // to cancel de de choosen code
