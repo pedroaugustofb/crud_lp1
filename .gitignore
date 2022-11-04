@@ -1,0 +1,3 @@
+/* Arquivos que não devem subir para o github */
+*.json
+*.exe

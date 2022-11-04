@@ -19,11 +19,11 @@ int main(){
         if(code == 0) break; //exit the system when user choose 0 on menu.
 
         /* to confirm */
-        int confirm = menu.confirmCode(code); //confirm or not the code
+        bool confirm = menu.confirmCode(code); //confirm or not the code
 
 
         /* to handle submit */
-        if(confirm == 1) menu.handleSubmit(code); //if the code it was confirmed
+        if(confirm) menu.handleSubmit(code); //if the code it was confirmed
         
     }
 
