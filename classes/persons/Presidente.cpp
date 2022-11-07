@@ -4,19 +4,19 @@
 
 using namespace std;
 
+#pragma once
 
 class Presidente : public Person {
 
-    protected:
-
-
-
     public:
+
+        Presidente(){
+            Person::officePost = "Presidente";
+        }
 
         void CreatePersonMenu(int step){
 
             string value;
-            float salary;
 
             system("CLS");
 
@@ -83,8 +83,8 @@ class Presidente : public Person {
                 case 5:
                     cout << "|" << endl << "|----------------> Digite o salario do Presidente: "; 
 
-                    cin >> salary; // get the salary of the new person
-                    Person::setSalary(salary);
+                    getline(cin, value); // get the salary of the new person
+                    Person::setSalary(value);
 
                     break;
                 
@@ -92,7 +92,6 @@ class Presidente : public Person {
 
                     cout << "|" << endl << "|----------------> Digite a Area de Formacao do Presidente: "; 
 
-                    getchar(); // to clean terminal for the getline
                     getline(cin, value);
                     this->setFormation(value);
 
