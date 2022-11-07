@@ -1,19 +1,23 @@
-#include <iostream>
+#include <iostream> 
 #include <string>
 #include "Person.cpp"
 
 using namespace std;
 
+#pragma once
+
 
 class Operador : public Person {
 
-
     public:
+
+        Operador(){
+            Person::officePost = "Operador";
+        }
 
         void CreatePersonMenu(int step){
 
             string value;
-            float salary;
 
             system("CLS");
             cout << "|--------------------------------------------------------------------------------------------------|" << endl;
@@ -77,8 +81,8 @@ class Operador : public Person {
                 case 5:
                     cout << "|" << endl << "|----------------> Digite o salario do Operador: "; 
 
-                    cin >> salary; // get the salary of the new person
-                    Person::setSalary(salary);
+                    getline(cin, value); // get the salary of the new person
+                    Person::setSalary(value);
 
                     break;
             }

@@ -1,5 +1,9 @@
 #include <iostream>
 #include <string>
+#include <vector>
+#include "utils/Repository.cpp"
+
+#include "persons/Person.cpp"
 #include "persons/Operador.cpp"
 #include "persons/Gerente.cpp"
 #include "persons/Diretor.cpp"
@@ -7,9 +11,11 @@
 
 using namespace std;
 
+#pragma once
 
 class Menu {
     private:
+        Repository repository;
 
     public:
         //constructor
@@ -129,9 +135,10 @@ class Menu {
 
             switch(code){
                 case 1:         // [1] - Cadastrar funcionario.
-                    this->cadastrarFuncionario();
+                    this->createFuncionario();
                     break;
-                case 2:         // [2] - Cadastrar funcionarios.
+                case 2:         // [2] - Consultar funcionarios.
+                    this->getAllFuncionarios();
                     break;
                 case 3:         // [3] - Cosultar funcionarios por tipo.
                     break;
@@ -144,7 +151,7 @@ class Menu {
             }
         }
 
-        void cadastrarFuncionario(){
+        void createFuncionario(){
             
             int newPerson = 0; //to create another person
 
@@ -178,13 +185,14 @@ class Menu {
                         if(code == 1){ //possibles for new Operador
                             
                             /* create a new Operador to the system */
-                            Operador newPerson;
+                            Person *newPerson = new Operador;
                             for(int step = 0; step <= 6 ; step++){
-                                newPerson.CreatePersonMenu(step);
+                                newPerson->CreatePersonMenu(step);
 
                                 if(step == 6){
                                     bool create = this->confirmCode(12);
                                     
+                                    if(create) repository.addPerson(newPerson);
                                     // Se create for True deve-se salvar a nova Pessoa
                                     // caso não deve se cancelar
 
@@ -196,13 +204,14 @@ class Menu {
                         } else if(code == 2){ //possibles for new Gerente
                             
                             /* create a new Gerente to the system */
-                            Gerente newPerson;
+                            Person *newPerson = new Gerente;
                             for(int step = 0; step <= 7; step++){
-                                newPerson.CreatePersonMenu(step);
+                                newPerson->CreatePersonMenu(step);
 
                                 if(step == 7){
                                     bool create = this->confirmCode(13);
 
+                                    if(create) repository.addPerson(newPerson);
                                     // Se create for True deve-se salvar a nova Pessoa
                                     // caso não deve se cancelar
 
@@ -213,14 +222,15 @@ class Menu {
                         } else if(code == 3){ //possibles for new Diretor
                             
                             /* create a new Gerente to the system */
-                            Diretor newPerson;
+                            Person *newPerson = new Diretor;
 
                             for(int step = 0; step <= 8; step++){
-                                newPerson.CreatePersonMenu(step);
+                                newPerson->CreatePersonMenu(step);
 
                                 if(step == 8){
                                     bool create = this->confirmCode(14);
                                     
+                                    if(create) repository.addPerson(newPerson);
                                     // Se create for True deve-se salvar a nova Pessoa
                                     // caso não deve se cancelar
 
@@ -231,15 +241,16 @@ class Menu {
 
                         } else if(code == 4){ //possibles for new Presidente
 
-                         /* create a new Gerente to the system */
-                            Presidente newPerson;
+                         /* create a new Presidente to the system */
+                            Person *newPerson = new Presidente;
 
                             for(int step = 0; step <= 8; step++){
-                                newPerson.CreatePersonMenu(step);
+                                newPerson->CreatePersonMenu(step);
 
                                 if(step == 8){
                                     bool create = this->confirmCode(15);
                                     
+                                    if(create) repository.addPerson(newPerson);
                                     // Se create for True deve-se salvar a nova Pessoa
                                     // caso não deve se cancelar
 
@@ -255,5 +266,21 @@ class Menu {
             }while(newPerson == 1); //if the user wants to register another person
         }
 
-};
+        void getAllFuncionarios(){
+            vector<Person *> Funcionarios = repository.getAll();
+            
+            cout << "|--------------------------------------------------------------------------------------------------|" << endl;
+            cout << "|                                                                                                  |" << endl;
 
+
+            for(Person *person : Funcionarios)
+                cout << "| " << person->getOfficePost() << " " << person->getCode() << " " << person->getName() << " |";
+
+            cout << "|                                                                                                  |" << endl;
+            cout << "|--------------------------------------------------------------------------------------------------|" << endl;
+
+            char res;
+            cout << "Digite qualquer coisa para voltar";
+            cin >> res;
+        }
+};

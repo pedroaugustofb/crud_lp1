@@ -15,7 +15,7 @@ class Person {
         string phone;
         string startDate;
         string officePost;
-        float salary;
+        string salary;
 
         string area; // Gerente + Diretor
         string formation; // Diretor + Presidente
@@ -44,8 +44,8 @@ class Person {
         virtual void setOfficePost(string value){ this->officePost = value; }
         virtual string getOfficePost(){ return this->officePost; }
 
-        virtual void setSalary(float value){ this->salary = value; }
-        virtual float getSalary(){ return this->salary; }
+        virtual void setSalary(string value){ this->salary = value; }
+        virtual string getSalary(){ return this->salary; }
 
         virtual void setArea(string value){ this->area = value; }
         virtual string getArea(){ return this->area; }
@@ -55,9 +55,8 @@ class Person {
         
         virtual void setAcademy(string value){ this->academy = value; }
         virtual string getAcademy(){ return this->academy; }
-        
-
-        
+    
+    
         virtual void CreatePersonMenu(int step) = 0;
 
 };
