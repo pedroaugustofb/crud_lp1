@@ -1,15 +1,7 @@
 Operador
-01
-Pedro
-Rua 1
+1
+Roberto
+Rua Um
 83 986251686
 25/02
 5700
-Gerente
-02
-Decio
-Rua 2
-83 77777
-26/02
-4000
-Social

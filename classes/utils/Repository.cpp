@@ -91,11 +91,9 @@ class Repository {
             fs.close();
         };
 
-        void addPerson(Person *person){ //to add and save a new Person in the repository
+        void saveRepository(){ //methos responsible to rewrite the repository (txt) basesed in the Funcionarios vector
 
             this->fs.open("classes/utils/repository.txt", fstream::out); //open file to write
-
-            Funcionarios.push_back(person);
 
             for(Person *person : Funcionarios){
                 string officePost = person->getOfficePost();
@@ -116,13 +114,95 @@ class Repository {
                     this->fs << person->getOfficePost() << endl << person->getCode() << endl << person->getName() << endl << person->getAdress() 
                     << endl << person->getPhone() << endl << person->getStartDate() << endl << person->getSalary() << endl << person->getFormation() << endl << person->getAcademy();
             }
+        
+            this->fs.close();
+        }
 
+        void addPerson(Person *person){ //to add and save a new Person in the repository
+
+            this->fs.open("classes/utils/repository.txt", fstream::out); //open file to write
+
+            Funcionarios.push_back(person);
+
+            this->saveRepository();
  
-
             this->fs.close();
         };
 
+        void deletePerson(string code){
+
+            int PersonIndex = 0;
+
+            for( Person *person : Funcionarios)
+                if(person->getCode() == code)
+                    break;
+                else PersonIndex++;
+            
+            Funcionarios.erase(Funcionarios.begin() + PersonIndex);
+                
+            this->saveRepository();
+
+        }
+
+        void updatePerson(Person *person){
+
+            string code = person->getCode();
+            int index = 0;
+
+            for(Person *person : Funcionarios)
+                if(person->getCode() == code) break;
+                else index++;
+            
+            Funcionarios.erase(Funcionarios.begin() + index);
+            Funcionarios.push_back(person);
+
+            this->saveRepository();
+        }
+
         vector <Person *> getAll(){ //method to return all Funcionarios
             return Funcionarios;
+        }
+
+        vector <Person *> getByType(string type){ //method to returl all Funcionarios by type (string)
+        
+            vector <Person *> FilteredFuncionarios;
+
+            for(Person *person : Funcionarios){
+                
+                string officePost = person->getOfficePost();
+
+                if(officePost == type) FilteredFuncionarios.push_back(person);
+            }
+
+            return FilteredFuncionarios;
+        }
+
+        void showPersonByCode(string code){
+            
+            if(this->verifyPersonByCode(code))
+                for( Person *person : this->Funcionarios){
+                        if(person->getCode() == code ){
+                            
+                            cout << "|--------------------------------------------------------------------------------------------------|" << endl;
+                            cout << "|                                                                                                  |" << endl;
+                            cout << "|    "<< person->getName() << "                                                                    |" << endl;
+                            cout << "|--------------------------------------------------------------------------------------------------|" << endl;
+                            cout << "|                                                                                                  |" << endl;
+                
+                        }  
+                    }
+            else cout << "Pessoa nao encontrada." << endl;
+                
+        }
+
+        bool verifyPersonByCode(string code){
+
+            bool founded = false;
+
+            for( Person *person : Funcionarios)
+                if(person->getCode() == code)
+                    founded = true;
+            
+            return founded;
         }
 };
