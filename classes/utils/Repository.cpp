@@ -119,14 +119,10 @@ class Repository {
         }
 
         void addPerson(Person *person){ //to add and save a new Person in the repository
-
-            this->fs.open("classes/utils/repository.txt", fstream::out); //open file to write
-
+        
             Funcionarios.push_back(person);
-
             this->saveRepository();
  
-            this->fs.close();
         };
 
         void deletePerson(string code){
@@ -185,7 +181,24 @@ class Repository {
                             
                             cout << "|--------------------------------------------------------------------------------------------------|" << endl;
                             cout << "|                                                                                                  |" << endl;
-                            cout << "|    "<< person->getName() << "                                                                    |" << endl;
+                            cout << "|                    Cargo:                      "<< person->getOfficePost() << "                                            |" << endl;
+                            cout << "|                    Codigo:                     "<< person->getCode() << "                                            |" << endl;
+                            cout << "|                    Nome:                       "<< person->getName() << "                                            |" << endl;
+                            cout << "|                    Endereco:                   "<< person->getAdress() << "                                            |" << endl;
+                            cout << "|                    Telefone:                   "<< person->getPhone() << "                                            |" << endl;
+                            cout << "|                    Data de Inicio:             "<< person->getStartDate() << "                                            |" << endl;
+                            cout << "|                    Salario:                    "<< person->getSalary() << "                                            |" << endl;
+
+                            if(person->getOfficePost() == "Gerente")
+                                cout << "|                    Area de Supervisao:         "<< person->getArea() << "                                            |" << endl;
+                            if(person->getOfficePost() == "Diretor"){
+                                cout << "|                    Area de Supervisao:         "<< person->getArea() << "                                            |" << endl;
+                                cout << "|                    Area de Formacao:           "<< person->getFormation() << "                                            |" << endl;
+                            }
+                            if(person->getOfficePost() == "Presidente"){
+                                cout << "|                    Area de Formacao:           "<< person->getFormation() << "                                            |" << endl;
+                                cout << "|                    Area de Formacao Academica: "<< person->getAcademy() << "                                            |" << endl;
+                            }
                             cout << "|--------------------------------------------------------------------------------------------------|" << endl;
                             cout << "|                                                                                                  |" << endl;
                 
@@ -200,8 +213,9 @@ class Repository {
             bool founded = false;
 
             for( Person *person : Funcionarios)
-                if(person->getCode() == code)
+                if(person->getCode() == code){
                     founded = true;
+                }
             
             return founded;
         }
