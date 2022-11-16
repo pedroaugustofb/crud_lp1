@@ -32,7 +32,6 @@ class Menu {
             cout << "|                                   [3] - Consultar funcionarios por tipo.                         |" << endl;
             cout << "|                                   [4] - Apagar funcionario.                                      |" << endl;
             cout << "|                                   [5] - Atualizar funcionario.                                   |" << endl;
-            cout << "|                                   [6] - Salvar alteracoes.                                       |" << endl;
             cout << "|                                                                                                  |" << endl;
             cout << "|--------------------------------------------------------------------------------------------------|" << endl;
 
@@ -110,6 +109,10 @@ class Menu {
                 cout << "|                                       Cadastrar Presidente?                                      |" << endl;
                     break;
 
+                    case 16: // Deletar Usuario
+                cout << "|                                          Deletar Usuario?                                        |" << endl;
+                    break;
+
                     default:
                 cout << "|                                             Confimar?                                            |" << endl;
                     break;
@@ -141,17 +144,18 @@ class Menu {
                     this->getAllFuncionarios();
                     break;
                 case 3:         // [3] - Cosultar funcionarios por tipo.
+                    this->getFuncionariosByType();
                     break;
                 case 4:         // [4] - Apagar funcionario.
+                    this->deleteFuncionario();
                     break;
                 case 5:         // [5] - Atualizar funcionario.
-                    break;
-                case 6:         // [6] - Salvar alteracoes.
+                    this->updateFuncionario();
                     break;
             }
         }
 
-        void createFuncionario(){
+        void createFuncionario(){ // to create a new Person
             
             int newPerson = 0; //to create another person
 
@@ -191,14 +195,27 @@ class Menu {
 
                                 if(step == 6){
                                     bool create = this->confirmCode(12);
-                                    
-                                    if(create) repository.addPerson(newPerson);
-                                    // Se create for True deve-se salvar a nova Pessoa
-                                    // caso não deve se cancelar
+                                    if(!repository.verifyPersonByCode(newPerson->getCode())){
 
-                                   if(!create) valid = false;
+                                        if(create) repository.addPerson(newPerson);
+                                        // Se create for True deve-se salvar a nova Pessoa
+                                        // caso não deve se cancelar
+
+                                        if(!create) valid = false;
+                                    
+                                    }else{
+                                        system("CLS");
+                                        cout << "|--------------------------------------------------------------------------------------------------|" << endl;
+                                        cout << "|                                                                                                  |" << endl;
+                                        cout << "|                         Codigo de Funcionario ja existente no sistema.                           |" << endl;
+                                        cout << "|--------------------------------------------------------------------------------------------------|" << endl;
+                                        cout << "|                                                                                                  |" << endl;
+                                        system("pause");
+                                    }
                                 }
                             }
+
+                            delete newPerson;
 
 
                         } else if(code == 2){ //possibles for new Gerente
@@ -211,13 +228,26 @@ class Menu {
                                 if(step == 7){
                                     bool create = this->confirmCode(13);
 
-                                    if(create) repository.addPerson(newPerson);
-                                    // Se create for True deve-se salvar a nova Pessoa
-                                    // caso não deve se cancelar
+                                    if(!repository.verifyPersonByCode(newPerson->getCode())){
 
-                                    if(!create) valid = false;
+                                        if(create) repository.addPerson(newPerson);
+                                        // Se create for True deve-se salvar a nova Pessoa
+                                        // caso não deve se cancelar
+
+                                        if(!create) valid = false;
+                                    
+                                    }else{
+                                        system("CLS");
+                                        cout << "|--------------------------------------------------------------------------------------------------|" << endl;
+                                        cout << "|                                                                                                  |" << endl;
+                                        cout << "|                         Codigo de Funcionario ja existente no sistema.                           |" << endl;
+                                        cout << "|                                                                                                  |" << endl;
+                                        cout << "|--------------------------------------------------------------------------------------------------|" << endl;
+                                        system("pause");
+                                    }
                                 }
                             }
+                            delete newPerson;
 
                         } else if(code == 3){ //possibles for new Diretor
                             
@@ -229,14 +259,26 @@ class Menu {
 
                                 if(step == 8){
                                     bool create = this->confirmCode(14);
-                                    
-                                    if(create) repository.addPerson(newPerson);
-                                    // Se create for True deve-se salvar a nova Pessoa
-                                    // caso não deve se cancelar
+                                    if(!repository.verifyPersonByCode(newPerson->getCode())){
 
-                                    if(!create) valid = false;
+                                        if(create) repository.addPerson(newPerson);
+                                        // Se create for True deve-se salvar a nova Pessoa
+                                        // caso não deve se cancelar
+
+                                        if(!create) valid = false;
+                                    
+                                    }else{
+                                        system("CLS");
+                                        cout << "|--------------------------------------------------------------------------------------------------|" << endl;
+                                        cout << "|                                                                                                  |" << endl;
+                                        cout << "|                         Codigo de Funcionario ja existente no sistema.                           |" << endl;
+                                        cout << "|--------------------------------------------------------------------------------------------------|" << endl;
+                                        cout << "|                                                                                                  |" << endl;
+                                        system("pause");
+                                    }
                                 }
                             }
+                            delete newPerson;
 
 
                         } else if(code == 4){ //possibles for new Presidente
@@ -250,13 +292,26 @@ class Menu {
                                 if(step == 8){
                                     bool create = this->confirmCode(15);
                                     
-                                    if(create) repository.addPerson(newPerson);
-                                    // Se create for True deve-se salvar a nova Pessoa
-                                    // caso não deve se cancelar
+                                    if(!repository.verifyPersonByCode(newPerson->getCode())){
 
-                                    if(!create) valid = false;
+                                        if(create) repository.addPerson(newPerson);
+                                        // Se create for True deve-se salvar a nova Pessoa
+                                        // caso não deve se cancelar
+
+                                        if(!create) valid = false;
+                                    
+                                    }else{
+                                        system("CLS");
+                                        cout << "|--------------------------------------------------------------------------------------------------|" << endl;
+                                        cout << "|                                                                                                  |" << endl;
+                                        cout << "|                         Codigo de Funcionario ja existente no sistema.                           |" << endl;
+                                        cout << "|--------------------------------------------------------------------------------------------------|" << endl;
+                                        cout << "|                                                                                                  |" << endl;
+                                        system("pause");
+                                    }
                                 }
                             }
+                            delete newPerson;
 
                         } else if(code != 0) valid = false; // the code is 0
                     } else valid = false; // to cancel de de choosen code
@@ -266,7 +321,7 @@ class Menu {
             }while(newPerson == 1); //if the user wants to register another person
         }
 
-        void getAllFuncionarios(){
+        void getAllFuncionarios(){ // to show all funcionarios
             vector<Person *> Funcionarios = repository.getAll();
             
             cout << "|--------------------------------------------------------------------------------------------------|" << endl;
@@ -274,13 +329,356 @@ class Menu {
 
 
             for(Person *person : Funcionarios)
-                cout << "| " << person->getOfficePost() << " " << person->getCode() << " " << person->getName() << " |";
+                cout << "| " << person->getOfficePost() << " " << person->getCode() << " " << person->getName() << " |" << endl;
 
             cout << "|                                                                                                  |" << endl;
-            cout << "|--------------------------------------------------------------------------------------------------|" << endl;
+            cout << "|--------------------------------------------------------------------------------------------------|" << endl << endl;
 
-            char res;
-            cout << "Digite qualquer coisa para voltar";
-            cin >> res;
+            string code;
+
+            getchar();
+
+            cout << "|----------------> Digite o codigo correspondente a operacao que deseja: ";
+            getline(cin, code);
+            system("CLS");
+
+            repository.showPersonByCode(code);
+
+            system("pause"); //responsible to pause de terminal
+        }
+
+        void getFuncionariosByType(){ // to show funcionarios by type
+            
+            system("CLS"); //responsible to clear de terminal
+
+            bool valid = false;
+            int code;
+
+            while(!valid){
+
+                cout << "|--------------------------------------------------------------------------------------------------|" << endl;
+                cout << "|                                                                                                  |" << endl;
+                cout << "|                          Escolha o Tipo de Funcionario para consultar.                           |" << endl;
+                cout << "|                                                                                                  |" << endl;
+                cout << "|                                     [0] - Cancelar Operacao.                                     |" << endl;
+                cout << "|                                     [1] - Consultar Operador.                                    |" << endl;
+                cout << "|                                     [2] - Consultar Gerente.                                     |" << endl;
+                cout << "|                                     [3] - Consultar Diretor.                                     |" << endl;
+                cout << "|                                     [4] - Consultar Presidente.                                  |" << endl;
+                cout << "|                                                                                                  |" << endl;
+                cout << "|--------------------------------------------------------------------------------------------------|" << endl;
+                code = (cin >> (cout << "|----------------> Digite o codigo correspondente a operacao que deseja: ",code), code);
+
+                if(code > 0 && code <= 4) valid = true;
+
+            }
+
+            string type = "indefinido";
+
+            switch (code){
+            case 1:
+                type = "Operador";
+                break;
+            case 2:
+                type = "Gerente";
+                break;
+            case 3:
+                type = "Diretor";
+                break;
+            case 4:
+                type = "Presidente";
+                break;
+            
+            default:
+                break;
+            }
+
+            if(type != "indefinido"){
+
+                vector<Person *> Funcionarios = repository.getByType(type);
+                
+                cout << "|--------------------------------------------------------------------------------------------------|" << endl;
+                cout << "|                                                                                                  |" << endl;
+
+                if(Funcionarios.size() == 0)
+                    cout << "|                        Nenhum Funcionario desse tipo encontrado.                                 |" << endl;
+
+                else for(Person *person : Funcionarios)
+                    cout << "| " << person->getOfficePost() << " " << person->getCode() << " " << person->getName() << " |" << endl;
+
+                cout << "|                                                                                                  |" << endl;
+                cout << "|--------------------------------------------------------------------------------------------------|" << endl << endl;
+
+                string code;
+
+                getchar();
+                cout << "|----------------> Digite o codigo correspondente a operacao que deseja: ";
+                getline(cin, code);
+                system("CLS");
+
+                repository.showPersonByCode(code);
+                
+                system("pause");
+            } 
+
+        }
+
+        void deleteFuncionario(){ //menu to delete funcionario 
+            
+            bool valid = false;
+            int code;
+
+            while(!valid){
+                cout << "|--------------------------------------------------------------------------------------------------|" << endl;
+                cout << "|                                                                                                  |" << endl;
+                cout << "|                          Escolha o Tipo de Funcionario para consultar.                           |" << endl;
+                cout << "|                                                                                                  |" << endl;
+                cout << "|                                     [0] - Cancelar Operacao.                                     |" << endl;
+                cout << "|                                     [1] - Consultar Funcionarios.                                |" << endl;
+                cout << "|                                     [2] - Deletar pelo codigo de Funcionario.                    |" << endl;
+                cout << "|                                                                                                  |" << endl;
+                cout << "|--------------------------------------------------------------------------------------------------|" << endl;
+                code = (cin >> (cout << "|----------------> Digite o codigo correspondente a operacao que deseja: ",code), code);
+
+                if(code >= 0 && code <= 2) valid = true;
+            }
+            getchar();
+
+            if(code == 1){
+                this->handleSubmit(2);
+            
+            }else if(code == 2){
+                
+                
+                cout << "|----------------> Digite o codigo do funcionario que deseja deletar: ";
+                string personId;
+                getline(cin, personId);
+
+                repository.showPersonByCode(personId);
+
+                bool founded = repository.verifyPersonByCode(personId);
+
+                /* confirm */
+                if(founded) {
+                    bool confirm = this->confirmCode(16);
+
+                    if(confirm)
+                        repository.deletePerson(personId);
+                }
+
+            }
+
+        }
+
+        void updateFuncionario(){ //menu to update funcionario
+            bool valid = false;
+            int code;
+
+            system("CLS");
+
+            while(!valid){
+                cout << "|--------------------------------------------------------------------------------------------------|" << endl;
+                cout << "|                                                                                                  |" << endl;
+                cout << "|                          Escolha o Tipo de Funcionario para consultar.                           |" << endl;
+                cout << "|                                                                                                  |" << endl;
+                cout << "|                                     [0] - Cancelar Operacao.                                     |" << endl;
+                cout << "|                                     [1] - Consultar Funcionarios.                                |" << endl;
+                cout << "|                                     [2] - Achar pessoa pelo codigo de Funcionario.               |" << endl;
+                cout << "|                                                                                                  |" << endl;
+                cout << "|--------------------------------------------------------------------------------------------------|" << endl;
+                code = (cin >> (cout << "|----------------> Digite o codigo correspondente a operacao que deseja: ",code), code);
+
+                if(code >= 0 && code <= 2) valid = true;
+            }
+            getchar();
+
+
+            if(code == 1) this->handleSubmit(2);
+
+            else if(code == 2){
+
+                cout << "|----------------> Digite o codigo do funcionario que deseja alterar: ";
+                string personId;
+                getline(cin, personId); 
+
+                vector <Person *> Funcionarios = repository.getAll();               
+
+                if(repository.verifyPersonByCode(personId)) // verify if the code is linked with a person in the system.
+                    for(Person *person : Funcionarios)    // find the person if the inputed code
+                        if(person->getCode() == personId){
+
+                            system("CLS");
+                            
+                            cout << "|--------------------------------------------------------------------------------------------------|" << endl;
+                            cout << "|                                                                                                  |" << endl;
+                            cout << "| " << person->getOfficePost() << " " << person->getCode() << " " << person->getName() << " |" << endl;
+                            cout << "|                                                                                                  |" << endl;
+                            cout << "|--------------------------------------------------------------------------------------------------|" << endl;
+
+                            bool validInput = false;
+                            int atributeCode;
+
+                            while(!validInput){
+
+                                cout << "|--------------------------------------------------------------------------------------------------|" << endl;
+                                cout << "|                                                                                                  |" << endl;
+                                cout << "|                          Escolha o Atributo do Funcionario para alterar.                         |" << endl;
+                                cout << "|                                                                                                  |" << endl;
+                                cout << "|                                     [0] - Cancelar Operacao.                                     |" << endl;
+                                cout << "|                                     [1] - Alterar Codigo.                                        |" << endl;
+                                cout << "|                                     [2] - Alterar Nome.                                          |" << endl;
+                                cout << "|                                     [3] - Alterar Endereco.                                      |" << endl;
+                                cout << "|                                     [4] - Alterar Telefone.                                      |" << endl;
+                                cout << "|                                     [5] - Alterar Data de Inicio.                                |" << endl;
+                                cout << "|                                     [6] - Alterar Salario.                                       |" << endl;
+                                cout << "|                                     [7] - Alterar Cargo.                                         |" << endl;
+
+                                if(person->getOfficePost() == "Gerente"){
+                                cout << "|                                     [8] - Alterar Area de Supervisao.                            |" << endl;
+                                }
+                                if(person->getOfficePost() == "Diretor"){
+                                cout << "|                                     [8] - Alterar Area de Supervisao.                            |" << endl;
+                                cout << "|                                     [9] - Alterar Area de Formacao.                              |" << endl;
+                                }
+                                if(person->getOfficePost() == "Presidente"){
+                                cout << "|                                     [8] - Alterar Area de Formacao.                              |" << endl;
+                                cout << "|                                     [9] - Alterar Area de Formacao Academica Maxima.             |" << endl;
+                                }
+
+
+                                cout << "|                                                                                                  |" << endl;
+                                cout << "|--------------------------------------------------------------------------------------------------|" << endl;
+                                atributeCode = (cin >> (cout << "|----------------> Digite o codigo correspondente a operacao que deseja: ",atributeCode), atributeCode);
+
+
+                                if(person->getOfficePost() == "Operador" && code > 0 && code <= 7)
+                                    validInput = true;
+                                else if(person-> getOfficePost() == "Gerente" && code > 0 && code <= 8)
+                                    validInput = true;
+                                else if(person-> getOfficePost() == "Diretor" && code > 0 && code <= 9)
+                                    validInput = true;
+                                else if(person-> getOfficePost() == "Presidente" && code > 0 && code <= 9)
+                                    validInput = true;
+                            }
+
+                            getchar();
+                            string value;
+                            int officePostCode;
+
+                            switch(atributeCode){
+                                case 1:
+                                    cout << "|----------------> Digite o novo codigo: "; 
+                                    getline(cin, value);
+                                    person->setCode(value);
+                                    break;
+                                case 2:
+                                    cout << "|----------------> Digite o novo nome: "; 
+                                    getline(cin, value);
+                                    person->setName(value);
+                                    break;
+                                case 3:
+                                    cout << "|----------------> Digite o novo endereco: "; 
+                                    getline(cin, value);
+                                    person->setAdress(value);
+                                    break;
+                                case 4:
+                                    cout << "|----------------> Digite o novo telefone: "; 
+                                    getline(cin, value);
+                                    person->setPhone(value);
+                                    break;
+                                case 5:
+                                    cout << "|----------------> Digite a nova data de inicio: "; 
+                                    getline(cin, value);
+                                    person->setStartDate(value);
+                                    break;
+                                case 6:
+                                    cout << "|----------------> Digite o novo salario: "; 
+                                    getline(cin, value);
+                                    person->setSalary(value);
+                                    break;
+                                case 7:
+
+                                    system("CLS");
+                                        cout << "|--------------------------------------------------------------------------------------------------|" << endl;
+                                        cout << "|                                                                                                  |" << endl;
+                                        cout << "|                                        Mudar para:                                               |" << endl;
+                                    if(person->getOfficePost() != "Operador")
+                                        cout << "|                                     [0] - Operador.                                              |" << endl;
+                                    if(person->getOfficePost() != "Gerente")
+                                        cout << "|                                     [1] - Gerente.                                               |" << endl;
+                                    if(person->getOfficePost() != "Diretor")
+                                        cout << "|                                     [2] - Diretor.                                               |" << endl;
+                                    if(person->getOfficePost() != "Presidente")
+                                        cout << "|                                     [3] - Presidente.                                            |" << endl;
+                                        cout << "|                                                                                                  |" << endl;
+                                        cout << "|--------------------------------------------------------------------------------------------------|" << endl;
+
+                                    officePostCode = (cin >> (cout << "|----------------> Digite o codigo correspondente ao cargo que deseja: ",officePostCode), officePostCode);
+
+                                    switch (officePostCode){
+                                    case 0:
+                                        person->setOfficePost("Operador");
+                                        break;
+                                    case 1:
+                                        person->setOfficePost("Gerente");
+                                        break;
+                                    case 2:
+                                        person->setOfficePost("Diretor");
+                                        break;
+                                    case 3:
+                                        person->setOfficePost("Presidente");
+                                        break;
+                                    
+                                    default:
+                                        break;
+                                    }
+                                    break;
+                                case 8:
+                                    getchar();
+                                    if(person->getOfficePost() == "Gerente")
+                                        cout << "|----------------> Digite a nova Area de Supervisao: "; 
+                                    if(person->getOfficePost() == "Diretor")
+                                        cout << "|----------------> Digite a nova Area de Supervisao: "; 
+                                    if(person->getOfficePost() == "Presidente")
+                                        cout << "|----------------> Digite a nova Area de Formacao: "; 
+                                    
+                                    getline(cin, value);
+
+                                    if(person->getOfficePost() == "Gerente" || person->getOfficePost() == "Diretor")
+                                        person->setArea(value);
+                                    else if(person->getOfficePost() == "Presidente")
+                                        person->setFormation(value);
+                                    break;
+                                case 9:
+                                    getchar();
+
+                                    if(person->getOfficePost() == "Diretor")
+                                        cout << "|----------------> Digite a nova Area de Formacao: "; 
+                                    if(person->getOfficePost() == "Presidente")
+                                        cout << "|----------------> Digite a nova Area de Formacao Maxima Academica: "; 
+                                    
+                                    getline(cin, value);
+
+                                    if(person->getOfficePost() == "Diretor")
+                                        person->setArea(value);
+                                    else if(person->getOfficePost() == "Presidente") 
+                                        person->setFormation(value);
+                                    break;
+                            }
+
+
+                            repository.updatePerson(person);
+
+                            cout << "|--------------------------------------------------------------------------------------------------|" << endl;
+                            cout << "|                                                                                                  |" << endl;
+                            cout << "|                                      Usuario Atualizado!                                         |" << endl;
+                            cout << "|                                                                                                  |" << endl;
+                            cout << "|--------------------------------------------------------------------------------------------------|" << endl << endl;
+
+                            system("pause");
+                            
+
+                        }
+            }
         }
 };
