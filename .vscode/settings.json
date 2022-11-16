@@ -12,7 +12,8 @@
         "utility": "cpp",
         "xmemory0": "cpp",
         "xtr1common": "cpp",
-        "xutility": "cpp"
+        "xutility": "cpp",
+        "system_error": "cpp"
     },
     "C_Cpp.errorSquiggles": "Disabled"
 }

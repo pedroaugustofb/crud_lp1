@@ -195,7 +195,7 @@ class Menu {
 
                                 if(step == 6){
                                     bool create = this->confirmCode(12);
-                                    if(repository.verifyPersonByCode(newPerson->getCode())){
+                                    if(!repository.verifyPersonByCode(newPerson->getCode())){
 
                                         if(create) repository.addPerson(newPerson);
                                         // Se create for True deve-se salvar a nova Pessoa
@@ -214,6 +214,8 @@ class Menu {
                                     }
                                 }
                             }
+
+                            delete newPerson;
 
 
                         } else if(code == 2){ //possibles for new Gerente
@@ -226,7 +228,7 @@ class Menu {
                                 if(step == 7){
                                     bool create = this->confirmCode(13);
 
-                                    if(repository.verifyPersonByCode(newPerson->getCode())){
+                                    if(!repository.verifyPersonByCode(newPerson->getCode())){
 
                                         if(create) repository.addPerson(newPerson);
                                         // Se create for True deve-se salvar a nova Pessoa
@@ -239,12 +241,13 @@ class Menu {
                                         cout << "|--------------------------------------------------------------------------------------------------|" << endl;
                                         cout << "|                                                                                                  |" << endl;
                                         cout << "|                         Codigo de Funcionario ja existente no sistema.                           |" << endl;
-                                        cout << "|--------------------------------------------------------------------------------------------------|" << endl;
                                         cout << "|                                                                                                  |" << endl;
+                                        cout << "|--------------------------------------------------------------------------------------------------|" << endl;
                                         system("pause");
                                     }
                                 }
                             }
+                            delete newPerson;
 
                         } else if(code == 3){ //possibles for new Diretor
                             
@@ -256,7 +259,7 @@ class Menu {
 
                                 if(step == 8){
                                     bool create = this->confirmCode(14);
-                                    if(repository.verifyPersonByCode(newPerson->getCode())){
+                                    if(!repository.verifyPersonByCode(newPerson->getCode())){
 
                                         if(create) repository.addPerson(newPerson);
                                         // Se create for True deve-se salvar a nova Pessoa
@@ -275,6 +278,7 @@ class Menu {
                                     }
                                 }
                             }
+                            delete newPerson;
 
 
                         } else if(code == 4){ //possibles for new Presidente
@@ -288,7 +292,7 @@ class Menu {
                                 if(step == 8){
                                     bool create = this->confirmCode(15);
                                     
-                                    if(repository.verifyPersonByCode(newPerson->getCode())){
+                                    if(!repository.verifyPersonByCode(newPerson->getCode())){
 
                                         if(create) repository.addPerson(newPerson);
                                         // Se create for True deve-se salvar a nova Pessoa
@@ -307,6 +311,7 @@ class Menu {
                                     }
                                 }
                             }
+                            delete newPerson;
 
                         } else if(code != 0) valid = false; // the code is 0
                     } else valid = false; // to cancel de de choosen code
@@ -332,7 +337,10 @@ class Menu {
             string code;
 
             getchar();
+
+            cout << "|----------------> Digite o codigo correspondente a operacao que deseja: ";
             getline(cin, code);
+            system("CLS");
 
             repository.showPersonByCode(code);
 
@@ -404,7 +412,9 @@ class Menu {
                 string code;
 
                 getchar();
+                cout << "|----------------> Digite o codigo correspondente a operacao que deseja: ";
                 getline(cin, code);
+                system("CLS");
 
                 repository.showPersonByCode(code);
                 
@@ -430,7 +440,7 @@ class Menu {
                 cout << "|--------------------------------------------------------------------------------------------------|" << endl;
                 code = (cin >> (cout << "|----------------> Digite o codigo correspondente a operacao que deseja: ",code), code);
 
-                if(code > 0 && code <= 2) valid = true;
+                if(code >= 0 && code <= 2) valid = true;
             }
             getchar();
 
@@ -478,7 +488,7 @@ class Menu {
                 cout << "|--------------------------------------------------------------------------------------------------|" << endl;
                 code = (cin >> (cout << "|----------------> Digite o codigo correspondente a operacao que deseja: ",code), code);
 
-                if(code > 0 && code <= 2) valid = true;
+                if(code >= 0 && code <= 2) valid = true;
             }
             getchar();
 
@@ -560,26 +570,32 @@ class Menu {
                                     cout << "|----------------> Digite o novo codigo: "; 
                                     getline(cin, value);
                                     person->setCode(value);
+                                    break;
                                 case 2:
                                     cout << "|----------------> Digite o novo nome: "; 
                                     getline(cin, value);
                                     person->setName(value);
+                                    break;
                                 case 3:
                                     cout << "|----------------> Digite o novo endereco: "; 
                                     getline(cin, value);
                                     person->setAdress(value);
+                                    break;
                                 case 4:
                                     cout << "|----------------> Digite o novo telefone: "; 
                                     getline(cin, value);
                                     person->setPhone(value);
+                                    break;
                                 case 5:
                                     cout << "|----------------> Digite a nova data de inicio: "; 
                                     getline(cin, value);
                                     person->setStartDate(value);
+                                    break;
                                 case 6:
                                     cout << "|----------------> Digite o novo salario: "; 
                                     getline(cin, value);
                                     person->setSalary(value);
+                                    break;
                                 case 7:
 
                                     system("CLS");
@@ -616,7 +632,7 @@ class Menu {
                                     default:
                                         break;
                                     }
-                                
+                                    break;
                                 case 8:
                                     getchar();
                                     if(person->getOfficePost() == "Gerente")
@@ -632,7 +648,7 @@ class Menu {
                                         person->setArea(value);
                                     else if(person->getOfficePost() == "Presidente")
                                         person->setFormation(value);
-
+                                    break;
                                 case 9:
                                     getchar();
 
@@ -647,7 +663,7 @@ class Menu {
                                         person->setArea(value);
                                     else if(person->getOfficePost() == "Presidente") 
                                         person->setFormation(value);
-
+                                    break;
                             }
 
 
